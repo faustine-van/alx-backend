@@ -25,7 +25,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        assert page > 0, page_size > 0
+        assert page > 0 or page_size > 0
         is_page_int = isinstance(page, int)
         is_page_size_int = isinstance(page_size, int)
         raise_error = "when page and/or page_size are not ints"
