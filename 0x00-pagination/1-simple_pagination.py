@@ -26,11 +26,9 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """get page of data"""
-        assert page > 0, page_size > 0
-        is_page_int = isinstance(page, int)
-        is_page_size_int = isinstance(page_size, int)
-        raise_error = "when page and/or page_size are not ints"
-        assert is_page_int and is_page_size_int, raise_error
+        raise_error = "Page must be a positive integer"
+        assert isinstance(page, int) and page > 0, raise_error
+        assert isinstance(page_size, int) and page_size > 0, raise_error
         res = index_range(page, page_size)
         start_index, end_index = res
         dataset = self.dataset()
