@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""pagination"""
 import csv
 import math
 from typing import List, Tuple
@@ -42,3 +43,4 @@ class Server:
         if start_index >= len(data):
             return []
         return data[start_index: end_index]
+
