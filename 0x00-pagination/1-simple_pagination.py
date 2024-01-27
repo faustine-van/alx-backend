@@ -30,7 +30,10 @@ class Server:
         is_page_size_int = isinstance(page_size, int)
         raise_error = "when page and/or page_size are not ints"
         assert is_page_int and is_page_size_int, raise_error
-        res = index_range(page, page_size)
-        start_index, end_index = res
-        dataset = self.dataset()
-        return dataset[start_index: end_index]
+        try:
+            res = index_range(page, page_size)
+            start_index, end_index = res
+            dataset = self.dataset()
+            return dataset[start_index: end_index]
+        except IndexError:
+            return []
