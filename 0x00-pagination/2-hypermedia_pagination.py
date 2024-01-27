@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import csv
 import math
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 index_range = __import__('0-simple_helper_function').index_range
 
 
@@ -43,7 +43,7 @@ class Server:
             return []
         return data[start_index: end_index]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """get_hyper of data"""
         data = self.dataset()
         total_pages = (len(data) + page_size - 1) // page_size
