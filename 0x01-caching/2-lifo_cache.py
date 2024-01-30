@@ -15,6 +15,7 @@ class LIFOCache(BaseCaching):
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
+        """add an item on cache"""
         if key is None or item is None:
             return
         if key in self.cache_data:
