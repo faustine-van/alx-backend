@@ -13,6 +13,7 @@ class FIFOCache(BaseCaching):
         super().__init__()
 
     def put(self, key, item):
+        """"add an item in cashe block"""
         if key is None or item is None:
             return
         self.cache_data[key] = item
