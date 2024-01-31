@@ -33,12 +33,13 @@ class LFUCache(BaseCaching):
                     for k in self.cache_data.keys():
                         if k in min_keys:
                             discarded_key = k
-                            self.cache_data.pop(k)
-                            self.count.pop(k)
+                            self.cache_data.pop(discarded_key)
+                            self.count.pop(discarded_key)
                             break  # break after removing first matching key
                 else:
-                    discarded_key = self.cache_data.pop(min_keys[0])
-                    self.count.pop(min_keys[0])
+                    discarded_key = min_keys[0]
+                    discarded_key = self.cache_data.pop(discarded_key)
+                    self.count.pop(discarded_key)
                 print(f'DISCARD: {discarded_key}')
             self.cache_data[key] = item
             self.count[key] = 1
