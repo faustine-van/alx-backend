@@ -21,11 +21,9 @@ babel.init_app(app, default_locale='en', default_timezone='UTC')
 
 @app.route('/', strict_slashes=False)
 def index():
-    """set / routes"""
-    title = 'Welcome to Holberton'
-    say_hello = 'Hello world'
-    return render_template('1-index.html', title=title, say_hello=say_hello)
+    """set / route"""
+    return render_template('0-index.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
