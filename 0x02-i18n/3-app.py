@@ -4,7 +4,7 @@
    supported languages
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -32,7 +32,9 @@ def get_locale():
 @app.route('/', strict_slashes=False)
 def index():
     """set / route"""
-    return render_template('0-index.html')
+    title = gettext('home_title')
+    say_hello = gettext('home_header')
+    return render_template('0-index.html', title=title, say_hello=say_hello)
 
 
 if __name__ == '__main__':
