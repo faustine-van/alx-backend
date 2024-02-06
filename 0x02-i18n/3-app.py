@@ -4,7 +4,7 @@
    supported languages
 """
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 
 
 class Config():
@@ -34,9 +34,9 @@ babel.init_app(app, default_locale='en', default_timezone='UTC',
 @app.route('/', strict_slashes=False)
 def index():
     """set / routes"""
-    title = 'Welcome to Holberton'
-    say_hello = 'Hello world'
-    return render_template('2-index.html', title=title, say_hello=say_hello)
+    title = gettext('home_title')
+    say_hello = gettext('home_header')
+    return render_template('3-index.html', title=title, say_hello=say_hello)
 
 
 if __name__ == '__main__':

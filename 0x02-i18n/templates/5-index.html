@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            {{ title }}
+        </title>
+    </head>
+    <body>
+        <h1>
+            {{ say_hello }}
+        </h1>
+
+        {% if logged_in_message %}
+        <p>{{ logged_in_message }}</p>
+        {% else %}
+        <p>{{ _('not_logged_in') }}</p>
+        {%  endif %}
+    </body>
+</html>
