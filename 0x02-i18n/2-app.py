@@ -6,38 +6,34 @@
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
-
-class Config():
-    """intialize configuration
-    """
-    LANGUAGES = ["en", "fr"]
-
-
 app = Flask(__name__)
-# load configuration from Config
-app.config.from_object(Config)
 babel = Babel(app)
 
 
+class Config:
+    """intialize configuration
+    """
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
+app.config.from_object(Config)
+
+
 # Set up the locale selector as a decorator
+@babel.localeselector
 def get_locale():
     """Returns the locale
     """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-# Configure Babel to use the supported languages
-babel.init_app(app, default_locale='en', default_timezone='UTC',
-               locale_selector=get_locale)
-
-
 @app.route('/', strict_slashes=False)
 def index():
-    """set / routes"""
-    title = 'Welcome to Holberton'
-    say_hello = 'Hello world'
-    return render_template('2-index.html', title=title, say_hello=say_hello)
+    """set / route"""
+    return render_template('0-index.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
