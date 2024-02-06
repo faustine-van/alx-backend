@@ -20,6 +20,7 @@ babel = Babel(app)
 
 
 # Set up the locale selector as a decorator
+@babel.localeselector
 def get_locale():
     """Returns the locale
     """
@@ -27,8 +28,7 @@ def get_locale():
 
 
 # Configure Babel to use the supported languages
-babel.init_app(app, default_locale='en', default_timezone='UTC',
-               locale_selector=get_locale)
+babel.init_app(app, default_locale='en', default_timezone='UTC')
 
 
 @app.route('/', strict_slashes=False)
