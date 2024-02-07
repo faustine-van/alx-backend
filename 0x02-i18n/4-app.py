@@ -21,7 +21,7 @@ class Config:
 app.config.from_object(Config)
 
 
-# Set up the locale selector as a decorator
+@babel.localeselector
 def get_locale():
     """Returns the locale
     """
@@ -39,4 +39,3 @@ def index():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
-
