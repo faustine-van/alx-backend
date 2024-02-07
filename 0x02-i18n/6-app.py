@@ -85,7 +85,7 @@ def index():
         user_name = None
         logged_in_message = None
 
-    return render_template('5-index.html',
+    return render_template('6-index.html',
                            user_name=user_name,
                            logged_in_message=logged_in_message)
 
