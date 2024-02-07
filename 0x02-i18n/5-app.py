@@ -7,34 +7,30 @@ from typing import Dict
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, gettext
 
-
-class Config():
-    """intialize configuration
-    """
-    LANGUAGES = ["en", "fr"]
-
-
 app = Flask(__name__)
-# load configuration from Config
-app.config.from_object(Config)
 babel = Babel(app)
 
 
-# Set up the locale selector as a decorator
+class Config:
+    """intialize configuration
+    """
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
+app.config.from_object(Config)
+
+
+@babel.localeselector
 def get_locale():
     """Returns the locale
     """
     args = request.args
     if 'locale' in args and args.get('locale') in app.config['LANGUAGES']:
         return args.get('locale')
-    # try to guess the language based on the Accept-Language header
-    # sent by the user's browser
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
-
-# Configure Babel to use the supported languages
-babel.init_app(app, default_locale='en', default_timezone='UTC',
-               locale_selector=get_locale)
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -66,8 +62,6 @@ def before_request():
 @app.route('/', strict_slashes=False)
 def index():
     """set / routes"""
-    title = gettext('home_title')
-    say_hello = gettext('home_header')
 
     current_user = g.user
     if current_user is not None:
@@ -77,11 +71,10 @@ def index():
         user_name = None
         logged_in_message = None
 
-    return render_template('5-index.html', title=title,
-                           say_hello=say_hello,
+    return render_template('5-index.html',
                            user_name=user_name,
                            logged_in_message=logged_in_message)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000)
